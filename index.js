@@ -1,17 +1,14 @@
 'use strict';
 
-const mongoose = require('mongoose');
-
-
 class MongooseStore {
   constructor (options) {
     options = options || {};
     options.collection = options.collection || 'sessions';
-    options.connection = options.connection || mongoose;
+    options.connection = options.connection;
     options.expires = options.expires || 60 * 60 * 24 * 14; // 2 weeks
     options.model = options.model || 'SessionStore';
 
-    const Schema = options.connection.Schema || mongoose.Schema;
+    const Schema = options.connection.Schema;
     const SessionSchema = new Schema({
       sid: {
         index: true,
